@@ -1,0 +1,18 @@
+# Dataset download
+kagglehub==0.3.12
+
+# CNN (Part 6). Install torch/torchvision with a CUDA build matching your
+# driver, e.g. for CUDA 12.4:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+torch
+torchvision
+numpy
+matplotlib
+scikit-learn
+seaborn
+tqdm
+
+# notebook (cnn.ipynb)
+jupyter
+ipykernel
+nbconvert
