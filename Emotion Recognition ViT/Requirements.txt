@@ -1,0 +1,10 @@
+opencv-python
+matplotlib
+pandas
+numpy
+scikit-learn
+transformers
+timm
+ipywidgets
+seaborn
+ipykernel
