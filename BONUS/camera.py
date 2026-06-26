@@ -180,12 +180,16 @@ def predict_emotion(face_bgr, emotion_model, device):
     EMOTIONS = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
     img_gray = cv2.cvtColor(face_bgr, cv2.COLOR_BGR2GRAY)
     pil_img  = Image.fromarray(img_gray)
+    w, h     = pil_img.size
+    side     = max(w, h)
+    padded   = Image.new('L', (side, side), 0)
+    padded.paste(pil_img, ((side - w) // 2, (side - h) // 2))
     tf = transforms.Compose([
         transforms.Resize((EMOTION_SIZE, EMOTION_SIZE)),
         transforms.ToTensor(),
         transforms.Normalize([0.5], [0.5]),
     ])
-    inp = tf(pil_img).unsqueeze(0).to(device)
+    inp = tf(padded).unsqueeze(0).to(device)
     with torch.no_grad():
         _, pred = torch.max(emotion_model(inp), 1)
     idx = pred.item()
