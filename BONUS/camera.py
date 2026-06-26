@@ -274,19 +274,22 @@ def run_webcam():
                 x2 = min(W_orig, x2); y2 = min(H_orig, y2)
 
                 emotion_text = ""
-                face_roi = frame[y1:y2, x1:x2]
+                pad = int(max(x2 - x1, y2 - y1) * 0.1)
+                rx1 = max(0, x1 - pad); ry1 = max(0, y1 - pad)
+                rx2 = min(W_orig, x2 + pad); ry2 = min(H_orig, y2 + pad)
+                face_roi = frame[ry1:ry2, rx1:rx2]
                 if face_roi.size > 0 and emotion_model is not None:
                     emotion_text = predict_emotion(face_roi, emotion_model, device)
 
                 color = (255, 200, 0)
-                cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                cv2.rectangle(frame, (rx1, ry1), (rx2, ry2), color, 2)
 
                 label = f"{emotion_text} ({conf:.2f})" if emotion_text \
                         else f"Face ({conf:.2f})"
                 (tw, th), _ = cv2.getTextSize(
                     label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
-                cv2.rectangle(frame, (x1, y1-th-10), (x1+tw, y1), color, -1)
-                cv2.putText(frame, label, (x1, y1-5),
+                cv2.rectangle(frame, (rx1, ry1-th-10), (rx1+tw, ry1), color, -1)
+                cv2.putText(frame, label, (rx1, ry1-5),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 2)
 
         cv2.imshow('ViT-YOLO + Emotion Detection  [Q = exit]', frame)
