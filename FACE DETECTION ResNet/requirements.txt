@@ -1,0 +1,12 @@
+# Install torch/torchvision with a CUDA build matching your driver, e.g. CUDA 12.4:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+torch
+torchvision
+numpy
+matplotlib
+Pillow
+tqdm
+
+# notebook (face_detection_WIDER.ipynb)
+jupyter
+ipykernel

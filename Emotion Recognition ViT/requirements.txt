@@ -1,0 +1,18 @@
+# Dataset download (download.py)
+kagglehub
+
+# Install torch/torchvision with a CUDA build matching your driver, e.g. CUDA 12.4:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+torch
+torchvision
+timm
+opencv-python
+numpy
+matplotlib
+seaborn
+scikit-learn
+
+# notebook (ViT.ipynb)
+jupyter
+ipykernel
+ipywidgets
